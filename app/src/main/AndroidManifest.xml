@@ -9,10 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ToDo">
-        <activity android:name=".signUpActivity" />
-        <activity android:name=".TasksActivity" />
-        <activity android:name=".ForgetPasswordActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activities.signUpActivity" />
+        <activity android:name=".Activities.TasksActivity" />
+        <activity android:name=".Activities.ForgetPasswordActivity" />
+        <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
