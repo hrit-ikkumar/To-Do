@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ToDo">
-        <activity android:name=".signUpActivity"></activity>
+        <activity android:name=".signUpActivity" />
         <activity android:name=".TasksActivity" />
         <activity android:name=".ForgetPasswordActivity" />
         <activity android:name=".MainActivity">
