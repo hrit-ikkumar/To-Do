@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">To-Do</string>
+    <string name="email">Email</string>
+    <string name="email_hint">Email Hint</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sing In</string>
+    <string name="forgot_password">Forget Password</string>
+    <string name="error_view">Error View</string>
+    <string name="email_verify_again">Email Verify Again</string>
+</resources>
