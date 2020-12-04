@@ -2,14 +2,12 @@ package com.example.to_do.Activities;
 import android.os.Bundle;
 import com.example.to_do.Core.MainActivityContractor;
 import com.example.to_do.Core.MainActivityPresenter;
-import com.example.to_do.Model.Player;
+import com.example.to_do.Model.ToDoTask;
 import com.example.to_do.R;
 import com.example.to_do.Utils.Config;
 import com.example.to_do.Utils.CreatePlayerDialog;
 import com.example.to_do.Utils.RecylerViewAdapter;
 import com.example.to_do.Utils.UpdatePlayerDialog;
-import com.google.android.gms.common.api.internal.TaskApiCall;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -34,12 +32,13 @@ public class TasksActivity extends AppCompatActivity implements CreatePlayerDial
     public DatabaseReference mReference;
     public RecyclerView mRecyclerView;
     public RecylerViewAdapter recyclerViewAdapter;
-    public ArrayList<Player> mPlayerList;
+    public ArrayList<ToDoTask> mToDoTaskList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_tasks);
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         Toolbar toolbar = findViewById(R.id.toolbar);
 
         mProgressbar = (ProgressBar)findViewById(R.id.progressBar);
@@ -66,11 +65,11 @@ public class TasksActivity extends AppCompatActivity implements CreatePlayerDial
     }
 
     @Override
-    public void savePlayer(Player player) {
+    public void savePlayer(ToDoTask toDoTask) {
 
         String key = mReference.push().getKey();
-        Player newPlayer = new Player(player.getName(),player.getAge(),player.getPosition(),key);
-        mPresenter.createNewPlayer(mReference,newPlayer);
+        ToDoTask newToDoTask = new ToDoTask(toDoTask.getName(),key);
+        mPresenter.createNewPlayer(mReference, newToDoTask);
 
     }
 
@@ -95,56 +94,56 @@ public class TasksActivity extends AppCompatActivity implements CreatePlayerDial
     }
 
     @Override
-    public void onPlayerRead(ArrayList<Player> players) {
+    public void onPlayerRead(ArrayList<ToDoTask> toDoTasks) {
 
-        this.mPlayerList = players;
-        recyclerViewAdapter = new RecylerViewAdapter(players,this);
+        this.mToDoTaskList = toDoTasks;
+        recyclerViewAdapter = new RecylerViewAdapter(toDoTasks,this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setAdapter(recyclerViewAdapter);
     }
 
     @Override
-    public void onPlayerUpdate(Player player) {
-        int index = getIndex(player);
-        mPlayerList.set(index,player);
+    public void onPlayerUpdate(ToDoTask toDoTask) {
+        int index = getIndex(toDoTask);
+        mToDoTaskList.set(index, toDoTask);
         recyclerViewAdapter.notifyItemChanged(index);
     }
 
     @Override
-    public void onPlayerDelete(Player player) {
-        int index = getIndex(player);
-        mPlayerList.remove(index);
+    public void onPlayerDelete(ToDoTask toDoTask) {
+        int index = getIndex(toDoTask);
+        mToDoTaskList.remove(index);
         recyclerViewAdapter.notifyItemRemoved(index);
 
-        Toast.makeText(TasksActivity.this,"Deleted Player "+player.getName(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(TasksActivity.this,"Deleted Player "+ toDoTask.getName(),Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void updatePlayer(Player player) {
-        mPresenter.updatePlayer(mReference,player);
+    public void updatePlayer(ToDoTask toDoTask) {
+        mPresenter.updatePlayer(mReference, toDoTask);
     }
 
     @Override
     public void onPlayerUpdateClick(int position) {
-        Player player = mPlayerList.get(position);
-        UpdatePlayerDialog updatePlayerDialog = new UpdatePlayerDialog(player);
+        ToDoTask toDoTask = mToDoTaskList.get(position);
+        UpdatePlayerDialog updatePlayerDialog = new UpdatePlayerDialog(toDoTask);
         updatePlayerDialog.show(getSupportFragmentManager(),"update dialog");
     }
 
     @Override
     public void onPlayerDeleteClick(int position) {
-        Player player = mPlayerList.get(position);
-        mPresenter.deletePlayer(mReference, player);
+        ToDoTask toDoTask = mToDoTaskList.get(position);
+        mPresenter.deletePlayer(mReference, toDoTask);
     }
 
-    public int getIndex(Player player)
+    public int getIndex(ToDoTask toDoTask)
     {
         int index = 0;
 
-        for (Player countPlayer: mPlayerList)
+        for (ToDoTask countToDoTask : mToDoTaskList)
         {
-            if(countPlayer.getKey().trim().equals(player.getKey()))
+            if(countToDoTask.getKey().trim().equals(toDoTask.getKey()))
             {
                 break;
             }

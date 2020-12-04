@@ -1,7 +1,7 @@
 package com.example.to_do.Core;
 
 
-import com.example.to_do.Model.Player;
+import com.example.to_do.Model.ToDoTask;
 import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
@@ -17,8 +17,8 @@ public class MainActivityPresenter implements MainActivityContractor.Presenter, 
     }
 
     @Override
-    public void createNewPlayer(DatabaseReference reference, Player player) {
-        mInteractor.performCreatePlayer(reference,player);
+    public void createNewPlayer(DatabaseReference reference, ToDoTask toDoTask) {
+        mInteractor.performCreatePlayer(reference, toDoTask);
     }
 
     @Override
@@ -27,13 +27,13 @@ public class MainActivityPresenter implements MainActivityContractor.Presenter, 
     }
 
     @Override
-    public void updatePlayer(DatabaseReference reference, Player player) {
-        mInteractor.performUpdatePlayer(reference,player);
+    public void updatePlayer(DatabaseReference reference, ToDoTask toDoTask) {
+        mInteractor.performUpdatePlayer(reference, toDoTask);
     }
 
     @Override
-    public void deletePlayer(DatabaseReference reference, Player player) {
-        mInteractor.performDeletePlayer(reference,player);
+    public void deletePlayer(DatabaseReference reference, ToDoTask toDoTask) {
+        mInteractor.performDeletePlayer(reference, toDoTask);
     }
 
     @Override
@@ -57,17 +57,17 @@ public class MainActivityPresenter implements MainActivityContractor.Presenter, 
     }
 
     @Override
-    public void onRead(ArrayList<Player> players) {
-        mView.onPlayerRead(players);
+    public void onRead(ArrayList<ToDoTask> toDoTasks) {
+        mView.onPlayerRead(toDoTasks);
     }
 
     @Override
-    public void onUpdate(Player player) {
-        mView.onPlayerUpdate(player);
+    public void onUpdate(ToDoTask toDoTask) {
+        mView.onPlayerUpdate(toDoTask);
     }
 
     @Override
-    public void onDelete(Player player) {
-        mView.onPlayerDelete(player);
+    public void onDelete(ToDoTask toDoTask) {
+        mView.onPlayerDelete(toDoTask);
     }
 }

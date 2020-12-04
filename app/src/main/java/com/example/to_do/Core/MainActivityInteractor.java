@@ -2,7 +2,7 @@ package com.example.to_do.Core;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.to_do.Model.Player;
+import com.example.to_do.Model.ToDoTask;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.ChildEventListener;
@@ -15,17 +15,17 @@ import java.util.ArrayList;
 public class MainActivityInteractor implements MainActivityContractor.Ineractor {
 
     private MainActivityContractor.onOperationListener mListner;
-    private ArrayList<Player> players = new ArrayList<>();
+    private ArrayList<ToDoTask> toDoTasks = new ArrayList<>();
 
     public MainActivityInteractor(MainActivityContractor.onOperationListener mListner) {
         this.mListner = mListner;
     }
 
     @Override
-    public void performCreatePlayer(DatabaseReference reference, Player player) {
+    public void performCreatePlayer(DatabaseReference reference, ToDoTask toDoTask) {
 
         mListner.onStart();
-        reference.child(player.getKey()).setValue(player).addOnCompleteListener(new OnCompleteListener<Void>() {
+        reference.child(toDoTask.getKey()).setValue(toDoTask).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful())
@@ -48,22 +48,22 @@ public class MainActivityInteractor implements MainActivityContractor.Ineractor 
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-                Player player = dataSnapshot.getValue(Player.class);
-                players.add(player);
-                mListner.onRead(players);
+                ToDoTask toDoTask = dataSnapshot.getValue(ToDoTask.class);
+                toDoTasks.add(toDoTask);
+                mListner.onRead(toDoTasks);
 
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                Player player = dataSnapshot.getValue(Player.class);
-                mListner.onUpdate(player);
+                ToDoTask toDoTask = dataSnapshot.getValue(ToDoTask.class);
+                mListner.onUpdate(toDoTask);
             }
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                Player player = dataSnapshot.getValue(Player.class);
-                mListner.onDelete(player);
+                ToDoTask toDoTask = dataSnapshot.getValue(ToDoTask.class);
+                mListner.onDelete(toDoTask);
             }
 
             @Override
@@ -79,9 +79,9 @@ public class MainActivityInteractor implements MainActivityContractor.Ineractor 
     }
 
     @Override
-    public void performUpdatePlayer(DatabaseReference reference, Player player) {
+    public void performUpdatePlayer(DatabaseReference reference, ToDoTask toDoTask) {
         mListner.onStart();
-        reference.child(player.getKey()).setValue(player).addOnCompleteListener(new OnCompleteListener<Void>() {
+        reference.child(toDoTask.getKey()).setValue(toDoTask).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful())
@@ -97,9 +97,9 @@ public class MainActivityInteractor implements MainActivityContractor.Ineractor 
     }
 
     @Override
-    public void performDeletePlayer(DatabaseReference reference, Player player) {
+    public void performDeletePlayer(DatabaseReference reference, ToDoTask toDoTask) {
         mListner.onStart();
-        reference.child(player.getKey()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+        reference.child(toDoTask.getKey()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful())

@@ -29,22 +29,6 @@
                     android:text="Name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
-                <TextView
-                    android:id="@+id/tv_age"
-                    android:layout_marginLeft="5dp"
-                    android:textSize="18dp"
-                    android:textColor="@android:color/black"
-                    android:text="Age"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:id="@+id/tv_position"
-                    android:layout_marginLeft="5dp"
-                    android:textSize="18dp"
-                    android:textColor="@android:color/black"
-                    android:text="Position"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_alignParentRight="true"

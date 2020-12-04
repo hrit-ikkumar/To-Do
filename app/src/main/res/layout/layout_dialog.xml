@@ -12,18 +12,6 @@
         android:hint="Name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-    <EditText
-        android:id="@+id/et_age"
-        android:layout_margin="5dp"
-        android:hint="Age"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <EditText
-        android:id="@+id/et_position"
-        android:layout_margin="5dp"
-        android:hint="Position"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
     <Button
         android:text="Save"
         android:id="@+id/btn_save"

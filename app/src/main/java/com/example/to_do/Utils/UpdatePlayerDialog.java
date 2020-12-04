@@ -13,20 +13,19 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
-import com.example.to_do.Model.Player;
+import com.example.to_do.Model.ToDoTask;
 import com.example.to_do.R;
 
 public class UpdatePlayerDialog extends AppCompatDialogFragment {
 
     public EditText mName;
-    public EditText mAge;
-    public EditText mPosition;
+
     public Button mSaveBtn;
     public UpdatePlayerDialog.UpdatePlayerDialogListener mListener;
-    public Player player;
+    public ToDoTask toDoTask;
 
-    public UpdatePlayerDialog(Player player) {
-        this.player = player;
+    public UpdatePlayerDialog(ToDoTask toDoTask) {
+        this.toDoTask = toDoTask;
     }
 
     @NonNull
@@ -42,30 +41,27 @@ public class UpdatePlayerDialog extends AppCompatDialogFragment {
         builder.setCancelable(true);
 
         mName = (EditText)view.findViewById(R.id.et_name);
-        mAge = (EditText)view.findViewById(R.id.et_age);
-        mPosition = (EditText)view.findViewById(R.id.et_position);
+
         mSaveBtn = (Button)view.findViewById(R.id.btn_save);
 
-        mName.setText(player.getName());
-        mAge.setText(player.getAge());
-        mPosition.setText(player.getPosition());
+        mName.setText(toDoTask.getName());
+
 
         mSaveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 String name = mName.getText().toString();
-                String age = mAge.getText().toString();
-                String position = mPosition.getText().toString();
 
-                if(name.isEmpty() || age.isEmpty() || position.isEmpty())
+
+                if(name.isEmpty())
                 {
                     return;
                 }
                 else
                 {
-                    Player updatePlayer = new Player(name,age,position,player.getKey());
-                    mListener.updatePlayer(updatePlayer);
+                    ToDoTask updateToDoTask = new ToDoTask(name);
+                    mListener.updatePlayer(updateToDoTask);
                     dismiss();
 
                 }
@@ -83,6 +79,6 @@ public class UpdatePlayerDialog extends AppCompatDialogFragment {
     }
 
     public interface UpdatePlayerDialogListener{
-        void updatePlayer(Player player);
+        void updatePlayer(ToDoTask toDoTask);
     }
 }

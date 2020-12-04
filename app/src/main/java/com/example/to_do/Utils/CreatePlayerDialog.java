@@ -13,14 +13,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
-import com.example.to_do.Model.Player;
+import com.example.to_do.Model.ToDoTask;
 import com.example.to_do.R;
 
 public class CreatePlayerDialog extends AppCompatDialogFragment {
 
     public EditText mName;
-    public EditText mAge;
-    public EditText mPosition;
     public Button mSaveBtn;
     public createPlayerDialogListener mListener;
 
@@ -37,8 +35,6 @@ public class CreatePlayerDialog extends AppCompatDialogFragment {
         builder.setCancelable(true);
 
         mName = (EditText)view.findViewById(R.id.et_name);
-        mAge = (EditText)view.findViewById(R.id.et_age);
-        mPosition = (EditText)view.findViewById(R.id.et_position);
         mSaveBtn = (Button)view.findViewById(R.id.btn_save);
 
         mSaveBtn.setOnClickListener(new View.OnClickListener() {
@@ -46,17 +42,15 @@ public class CreatePlayerDialog extends AppCompatDialogFragment {
             public void onClick(View v) {
 
                 String name = mName.getText().toString();
-                String age = mAge.getText().toString();
-                String position = mPosition.getText().toString();
 
-                if(name.isEmpty() || age.isEmpty() || position.isEmpty())
+                if(name.isEmpty())
                 {
                     return;
                 }
                 else
                 {
-                    Player player = new Player(name,age,position);
-                    mListener.savePlayer(player);
+                    ToDoTask toDoTask = new ToDoTask(name);
+                    mListener.savePlayer(toDoTask);
                     dismiss();
 
                 }
@@ -74,6 +68,6 @@ public class CreatePlayerDialog extends AppCompatDialogFragment {
     }
 
     public interface createPlayerDialogListener{
-        void savePlayer(Player player);
+        void savePlayer(ToDoTask toDoTask);
     }
 }

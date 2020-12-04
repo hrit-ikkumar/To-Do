@@ -10,18 +10,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.to_do.Model.Player;
+import com.example.to_do.Model.ToDoTask;
 import com.example.to_do.R;
 
 import java.util.ArrayList;
 
 public class RecylerViewAdapter extends RecyclerView.Adapter<RecylerViewAdapter.RecyclerViewHolder> {
 
-    public ArrayList<Player> players;
+    public ArrayList<ToDoTask> toDoTasks;
     public onPlayerListener mOnPlayerListener;
 
-    public RecylerViewAdapter(ArrayList<Player> players, onPlayerListener onPlayerListener) {
-        this.players = players;
+    public RecylerViewAdapter(ArrayList<ToDoTask> toDoTasks, onPlayerListener onPlayerListener) {
+        this.toDoTasks = toDoTasks;
         this.mOnPlayerListener = onPlayerListener;
     }
 
@@ -37,22 +37,19 @@ public class RecylerViewAdapter extends RecyclerView.Adapter<RecylerViewAdapter.
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
 
-        holder.mName.setText(players.get(position).getName());
-        holder.mAge.setText(players.get(position).getAge());
-        holder.mPosition.setText(players.get(position).getPosition());
+        holder.mName.setText(toDoTasks.get(position).getName());
 
     }
 
     @Override
     public int getItemCount() {
-        return players.size();
+        return toDoTasks.size();
     }
 
     public class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         public TextView mName;
-        public TextView mAge;
-        public TextView mPosition;
+
         public Button mUpdateBtn;
         public Button mDeleteBtn;
         public onPlayerListener mListener;
@@ -64,8 +61,7 @@ public class RecylerViewAdapter extends RecyclerView.Adapter<RecylerViewAdapter.
             this.mListener = onPlayerListener;
 
             mName = (TextView)itemView.findViewById(R.id.tv_name);
-            mAge = (TextView)itemView.findViewById(R.id.tv_age);
-            mPosition = (TextView)itemView.findViewById(R.id.tv_position);
+
             mUpdateBtn = (Button)itemView.findViewById(R.id.btn_update);
             mDeleteBtn = (Button)itemView.findViewById(R.id.btn_delete);
 

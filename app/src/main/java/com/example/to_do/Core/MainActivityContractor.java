@@ -1,7 +1,7 @@
 package com.example.to_do.Core;
 
 
-import com.example.to_do.Model.Player;
+import com.example.to_do.Model.ToDoTask;
 
 import com.google.firebase.database.DatabaseReference;
 
@@ -14,23 +14,23 @@ public interface MainActivityContractor {
         void onCreatePlayerFailure();
         void onProcessStart();
         void onProcessEnd();
-        void onPlayerRead(ArrayList<Player>players);
-        void onPlayerUpdate(Player player);
-        void onPlayerDelete(Player player);
+        void onPlayerRead(ArrayList<ToDoTask> toDoTasks);
+        void onPlayerUpdate(ToDoTask toDoTask);
+        void onPlayerDelete(ToDoTask toDoTask);
     }
 
     interface Presenter{
-        void createNewPlayer(DatabaseReference reference, Player player);
+        void createNewPlayer(DatabaseReference reference, ToDoTask toDoTask);
         void readPlayers(DatabaseReference reference);
-        void updatePlayer(DatabaseReference reference, Player player);
-        void deletePlayer(DatabaseReference reference, Player player);
+        void updatePlayer(DatabaseReference reference, ToDoTask toDoTask);
+        void deletePlayer(DatabaseReference reference, ToDoTask toDoTask);
     }
 
     interface Ineractor{
-        void performCreatePlayer(DatabaseReference reference, Player player);
+        void performCreatePlayer(DatabaseReference reference, ToDoTask toDoTask);
         void performReadPlayers(DatabaseReference reference);
-        void performUpdatePlayer(DatabaseReference reference,Player player);
-        void performDeletePlayer(DatabaseReference reference, Player player);
+        void performUpdatePlayer(DatabaseReference reference, ToDoTask toDoTask);
+        void performDeletePlayer(DatabaseReference reference, ToDoTask toDoTask);
     }
 
     interface onOperationListener{
@@ -38,8 +38,8 @@ public interface MainActivityContractor {
         void onFailure();
         void onStart();
         void onEnd();
-        void onRead(ArrayList<Player> players);
-        void onUpdate(Player player);
-        void onDelete(Player player);
+        void onRead(ArrayList<ToDoTask> toDoTasks);
+        void onUpdate(ToDoTask toDoTask);
+        void onDelete(ToDoTask toDoTask);
     }
 }
