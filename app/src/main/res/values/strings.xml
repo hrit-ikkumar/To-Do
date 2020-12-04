@@ -7,4 +7,7 @@
     <string name="forgot_password">Forget Password</string>
     <string name="error_view">Error View</string>
     <string name="email_verify_again">Email Verify Again</string>
+    <string name="enterEmailId">Enter Email Id</string>
+    <string name="user_domain_com">user@domain.com</string>
+    <string name="reset_password">Reset Password</string>
 </resources>
