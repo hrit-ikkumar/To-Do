@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     EditText passwordTextInput;
     Button signInButton;
     Button forgotPasswordButton;
+    Button singnUpButtonClk;
     Button sendVerifyMailAgainButton;
     TextView errorView;
 
@@ -38,12 +39,22 @@ public class MainActivity extends AppCompatActivity {
         passwordTextInput = findViewById(R.id.signInPasswordTextInput);
         signInButton = findViewById(R.id.signInButton);
         forgotPasswordButton = findViewById(R.id.forgotPasswordButton);
+        singnUpButtonClk = findViewById(R.id.signUpButton);
         sendVerifyMailAgainButton = findViewById(R.id.verifyEmailAgainButton);
         errorView = findViewById(R.id.signInErrorView);
 
         sendVerifyMailAgainButton.setVisibility(View.INVISIBLE);
 
         mAuth = FirebaseAuth.getInstance();
+
+        singnUpButtonClk.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view)
+            {
+                Intent signUpAcclivityIntent = new Intent(MainActivity.this, signUpActivity.class);
+                startActivity(signUpAcclivityIntent);
+            }
+        });
 
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                                                 System.out.println("Email Verified : " + user.isEmailVerified());
-                                                Intent HomeActivity = new Intent(MainActivity.this, MainActivity.class);
+                                                Intent HomeActivity = new Intent(MainActivity.this, TasksActivity.class);
                                                 setResult(RESULT_OK, null);
                                                 startActivity(HomeActivity);
                                                 MainActivity.this.finish();
@@ -104,11 +115,7 @@ public class MainActivity extends AppCompatActivity {
 
                                 }
                             });
-
-
                 }
-
-
             }
         });
 
